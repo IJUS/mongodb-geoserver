@@ -6,9 +6,9 @@ import com.mongodb.DBCursor
 import com.mongodb.DBObject
 import com.spidasoftware.mongodb.data.MongoDBFeatureSource
 import com.spidasoftware.mongodb.feature.iterator.MongoDBFeatureIterator
-import com.vividsolutions.jts.geom.Coordinate
-import com.vividsolutions.jts.geom.GeometryFactory
-import com.vividsolutions.jts.geom.Point
+import org.locationtech.jts.geom.Coordinate
+import org.locationtech.jts.geom.GeometryFactory
+import org.locationtech.jts.geom.Point
 import org.apache.commons.lang.StringUtils
 import org.geotools.data.Query
 import org.geotools.data.simple.SimpleFeatureCollection
@@ -16,7 +16,7 @@ import org.geotools.data.simple.SimpleFeatureIterator
 import org.geotools.feature.GeometryAttributeImpl
 import org.geotools.feature.NameImpl
 import org.geotools.feature.simple.SimpleFeatureBuilder
-import org.geotools.feature.type.ComplexFeatureTypeFactoryImpl
+import org.geotools.data.complex.feature.type.ComplexFeatureTypeFactoryImpl
 import org.geotools.geometry.jts.JTS
 import org.geotools.geometry.jts.ReferencedEnvelope
 import org.geotools.referencing.CRS

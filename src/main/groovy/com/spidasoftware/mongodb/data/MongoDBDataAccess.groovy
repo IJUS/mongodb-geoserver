@@ -7,13 +7,14 @@ import com.mongodb.DBObject
 import com.mongodb.MongoClient
 import com.mongodb.MongoCredential
 import com.mongodb.ServerAddress
-import com.vividsolutions.jts.geom.Point
+import org.locationtech.jts.geom.Point
 import org.geotools.data.DataAccess
 import org.geotools.data.FeatureSource
 import org.geotools.data.ServiceInfo
 import org.geotools.feature.NameImpl
 import org.geotools.feature.simple.SimpleFeatureTypeBuilder
 import org.geotools.referencing.CRS
+import org.opengis.referencing.crs.CoordinateReferenceSystem
 import org.geotools.util.logging.Logging
 import org.opengis.feature.Feature
 import org.opengis.feature.type.FeatureType
@@ -91,8 +92,8 @@ public class MongoDBDataAccess implements DataAccess<FeatureType, Feature> {
             simpleFeatureTypeBuilder.setName(typeName)
 
             if(mapping.geometry && mapping.displayGeometry) {
-                simpleFeatureTypeBuilder.setCRS(CRS.decode(mapping.geometry.crs))
-                simpleFeatureTypeBuilder.add(mapping.geometry.name, Point.class)
+                CoordinateReferenceSystem crs = CRS.decode(mapping.geometry.crs)
+                simpleFeatureTypeBuilder.add(mapping.geometry.name, Point.class, crs)
             }
 
             addAttributes(simpleFeatureTypeBuilder, mapping, mapping)

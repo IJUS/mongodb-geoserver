@@ -10,7 +10,7 @@ apply plugin: 'project-report'
 apply plugin: 'java-library-distribution'
 
 group = 'com.spidasoftware'
-version = '0.3'
+version = '0.3.1'
 description = "mongodb-geoserver-plugin"
 
 sourceCompatibility = 1.7
@@ -51,7 +51,7 @@ repositories {
     mavenCentral()
     maven { url m2Settings.exposed }
     maven { url "https://dev.spidasoftware.com/artifactory/list/boundlessgeo" }
-     maven { url "https://download.osgeo.org/webdav/geotools" }
+    maven { url "https://download.osgeo.org/webdav/geotools" }
 }
 
 task sourcesZip(type: Zip, dependsOn: classes) {
@@ -62,7 +62,7 @@ task sourcesZip(type: Zip, dependsOn: classes) {
 		from { 'gradlew.bat' }
 		from { 'LICENSE' }
 		from { 'README.md' }
-        		
+
 	}
 	into ('src') {
 		from { 'src' }
@@ -70,7 +70,7 @@ task sourcesZip(type: Zip, dependsOn: classes) {
 	into ('gradle') {
 		from { 'gradle' }
 	}
-} 
+}
 
 distributions {
     main {
@@ -98,13 +98,11 @@ uploadArchives {
 	}
 }
 
-def geotoolsVersion = '14.3'
-def geoserverVersion = '2.8.3'
+def geotoolsVersion = '21.2'
+def geoserverVersion = '2.15.2'
 dependencies {
     compile group: 'org.geotools', name: 'gt-main', version:"${geotoolsVersion}", transitive: false
-    compile group: 'org.geotools', name: 'gt-data', version:"${geotoolsVersion}", transitive: false
     compile group: 'org.geotools', name: 'gt-opengis', version:"${geotoolsVersion}", transitive: false
-    compile group: 'org.geotools', name: 'gt-api', version:"${geotoolsVersion}", transitive: false
     compile group: 'org.geotools', name: 'gt-complex', version:"${geotoolsVersion}", transitive: false
     compile group: 'org.geotools', name: 'gt-referencing', version:"${geotoolsVersion}", transitive: false
     compile group: 'org.geotools', name: 'gt-metadata', version:"${geotoolsVersion}", transitive: false
@@ -112,10 +110,12 @@ dependencies {
     compile group: 'org.geotools.ogc', name: 'net.opengis.wfs', version:"${geotoolsVersion}", transitive: false
     compile(group: 'org.geoserver.web', name: 'gs-web-core', version:"${geoserverVersion}") {
         exclude module: 'jai_core'
+		exclude module: 'commons-beanutils'
     }
     compile group: 'org.mongodb', name:'mongo-java-driver', version:'3.2.2'
-    compile group: 'com.vividsolutions', name:'jts', version:'1.13', transitive: false
+    compile group: 'org.locationtech.jts', name:'jts-core', version:'1.16.1', transitive: false
     compile group: 'org.jscience', name:'jscience', version:'4.3.1', transitive: false
+	compile group: 'commons-beanutils', name: 'commons-beanutils', version:'1.9.2'
 
     compile "org.codehaus.groovy:groovy-all:2.4.1"
     testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
@@ -146,4 +146,3 @@ task wrapper(type: Wrapper) {
  	 *****************************************************************************************/
 	distributionUrl = 'http://services.gradle.org/distributions/gradle-1.11-all.zip'
 }
-

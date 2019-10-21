@@ -6,7 +6,7 @@ import com.mongodb.DB
 import com.mongodb.DBCollection
 import com.mongodb.DBObject
 import com.spidasoftware.mongodb.filter.FilterToDBQuery
-import com.vividsolutions.jts.geom.Coordinate
+import org.locationtech.jts.geom.Coordinate
 import org.geotools.data.*
 import org.geotools.feature.FeatureCollection
 import org.geotools.geometry.jts.ReferencedEnvelope

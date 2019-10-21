@@ -9,7 +9,7 @@ import com.mongodb.DBObject
 import com.spidasoftware.mongodb.data.MongoDBFeatureSource
 import com.spidasoftware.mongodb.feature.collection.MongoDBFeatureCollection
 import com.spidasoftware.mongodb.feature.collection.MongoDBSubCollectionFeatureCollection
-import com.vividsolutions.jts.geom.Geometry
+import org.locationtech.jts.geom.Geometry
 import org.geotools.data.Query
 import org.geotools.feature.FeatureCollection
 import org.geotools.util.Converters
