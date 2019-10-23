@@ -139,9 +139,15 @@ public class MongoDBFeatureSource implements FeatureSource<FeatureType, Feature>
     public ReferencedEnvelope getBounds(Query query) throws IOException {
         ReferencedEnvelope referencedEnvelope = new ReferencedEnvelope()
         new FilterToDBQuery(this.dbCollection, this.featureType, this.mapping, this).getFeatureCollection(query).toArray().each { SimpleFeature feature ->
-            Coordinate coordinate = feature.getAttribute(mapping.geometry.name)?.getCoordinate()
-            if(coordinate != null) {
-                referencedEnvelope.expandToInclude(coordinate)
+            println "mapping: ${mapping}"
+            println "geometry: ${mapping.geometry}"
+            println "name: ${mapping.geometry?.name}"
+            String name = mapping.geometry?.name
+            if (name != null) {
+                Coordinate coordinate = feature.getAttribute(name)?.getCoordinate()
+                if(coordinate != null) {
+                    referencedEnvelope.expandToInclude(coordinate)
+                }
             }
         }
         return referencedEnvelope
